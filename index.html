@@ -106,6 +106,22 @@
       font-weight: 700;
       color: var(--white) !important;
       letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbar-logo svg {
+      transition: transform 0.3s ease;
+    }
+
+    .navbar:hover .navbar-logo svg {
+      transform: scale(1.1) rotate(5deg);
     }
 
     .nav-link {
@@ -144,15 +160,13 @@
     }
 
     /* ============================================
-       HERO SECTION - Fullscreen Premium
+       HERO SECTION - Fullscreen Premium with Slider
        ============================================ */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(26, 32, 44, 0.88) 100%), 
-                  url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80');
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(26, 32, 44, 0.88) 100%);
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
       color: var(--white);
       display: flex;
       align-items: center;
@@ -160,6 +174,97 @@
       position: relative;
       overflow: hidden;
       margin-top: 70px;
+    }
+
+    .hero-background-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      z-index: 0;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .slider-dot.active {
+      background: var(--steel-blue);
+      width: 30px;
+      border-radius: 6px;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
+
+    .slider-dot:hover {
+      background: var(--cyan-accent);
+      transform: scale(1.2);
+    }
+
+    .slider-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(56, 189, 248, 0.3);
+      border: 2px solid rgba(56, 189, 248, 0.6);
+      color: var(--white);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+      font-size: 1.5rem;
+    }
+
+    .slider-nav-btn:hover {
+      background: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .slider-nav-btn.prev {
+      left: 30px;
+    }
+
+    .slider-nav-btn.next {
+      right: 30px;
     }
 
     .hero::before {
@@ -466,7 +571,8 @@
     .service-card:nth-child(3) { animation-delay: 0.5s; }
     .service-card:nth-child(4) { animation-delay: 0.7s; }
     .service-card:nth-child(5) { animation-delay: 0.9s; }
-    .service-card:nth-child(6) { animation-delay: 1.1s; }
+    .service-card:nth-child(7) { animation-delay: 1.3s; }
+    .service-card:nth-child(8) { animation-delay: 1.5s; }
 
     @keyframes fade-up {
       from {
@@ -532,6 +638,34 @@
       line-height: 1.7;
     }
 
+    .service-points {
+      list-style: none;
+      padding: 0;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .service-points li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .service-points li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--steel-blue);
+      font-weight: bold;
+    }
+
+    .service-card:hover .service-points li {
+      padding-left: 2rem;
+      color: var(--text-dark);
+    }
+
     /* ============================================
        PROJECTS SECTION
        ============================================ */
@@ -561,6 +695,10 @@
         grid-template-columns: repeat(3, 1fr);
       }
     }
+
+    .project-card:nth-child(4) { animation-delay: 0.7s; }
+    .project-card:nth-child(5) { animation-delay: 0.9s; }
+    .project-card:nth-child(6) { animation-delay: 1.1s; }
 
     .project-card {
       position: relative;
@@ -691,39 +829,232 @@
     }
 
     /* ============================================
-       CONTACT SECTION
+       CERTIFICATIONS SECTION
        ============================================ */
-    #contact {
-      background: var(--light-gray);
+    #certifications {
+      background: var(--white);
       position: relative;
     }
 
-    .contact-header {
+    .certifications-header {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: 4rem;
     }
 
-    .contact-header h2 {
+    .certifications-header h2 {
       opacity: 0;
       animation: fade-scale-in 0.8s ease-out forwards;
     }
 
-    .contact-header p {
-      font-size: 1.1rem;
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      .certifications-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .certification-card {
+      background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+      border: 2px solid var(--border-light);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      opacity: 0;
+      animation: fade-up 0.8s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .certification-card:nth-child(1) { animation-delay: 0.1s; }
+    .certification-card:nth-child(2) { animation-delay: 0.3s; }
+    .certification-card:nth-child(3) { animation-delay: 0.5s; }
+    .certification-card:nth-child(4) { animation-delay: 0.7s; }
+    .certification-card:nth-child(5) { animation-delay: 0.9s; }
+    .certification-card:nth-child(6) { animation-delay: 1.1s; }
+    .certification-card:nth-child(7) { animation-delay: 1.3s; }
+    .certification-card:nth-child(8) { animation-delay: 1.5s; }
+
+    .certification-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .certification-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--steel-blue);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .certification-card:hover::before {
+      left: 100%;
+    }
+
+    .certification-icon {
+      font-size: 3.5rem;
+      color: var(--steel-blue);
+      margin-bottom: 1rem;
+      transition: var(--transition-bounce);
+    }
+
+    .certification-card:hover .certification-icon {
+      transform: scale(1.2) rotateY(360deg);
+      animation: spin-cert 0.6s ease-in-out;
+    }
+
+    @keyframes spin-cert {
+      0% { transform: scaleY(1); }
+      50% { transform: scaleY(0); }
+      100% { transform: scaleY(1); }
+    }
+
+    .certification-card h5 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+    }
+
+    .certification-card p {
       color: var(--medium-gray);
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .certification-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--steel-blue), var(--cyan-accent));
+      color: var(--white);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+
+    /* ============================================
+       ENHANCED CONTACT SECTION WITH MAP
+       ============================================ */
+    #contact {
+      background: linear-gradient(135deg, var(--dark-navy) 0%, var(--dark-charcoal) 100%);
+      position: relative;
+      color: var(--white);
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 968px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-form {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 3rem;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      opacity: 0;
+      animation: fade-scale-in 0.8s ease-out 0.4s forwards;
+    }
+
+    .contact-form .form-control {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--white);
+    }
+
+    .contact-form .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .contact-form .form-control:focus {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--steel-blue);
+      box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.25);
+      color: var(--white);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
       opacity: 0;
       animation: fade-scale-in 0.8s ease-out 0.2s forwards;
     }
 
-    .contact-form {
-      max-width: 550px;
-      margin: 0 auto;
-      background: var(--white);
-      padding: 3rem;
+    .contact-info h3 {
+      color: var(--white);
+      font-size: 2rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .contact-info-icon {
+      font-size: 2rem;
+      color: var(--steel-blue);
+      min-width: 50px;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .contact-info-content h5 {
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .contact-info-content p {
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .map-container {
       border-radius: 20px;
-      box-shadow: var(--shadow-medium);
+      overflow: hidden;
+      height: 400px;
+      box-shadow: var(--shadow-deep);
       opacity: 0;
-      animation: fade-scale-in 0.8s ease-out 0.4s forwards;
+      animation: fade-scale-in 0.8s ease-out forwards;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 968px) {
+      .map-container {
+        height: 300px;
+      }
     }
 
     .form-group {
@@ -772,49 +1103,198 @@
     }
 
     /* ============================================
-       FOOTER
+       PROFESSIONAL FOOTER
        ============================================ */
     footer {
       background: var(--dark-navy);
       color: var(--medium-gray);
-      padding: 3rem 0 1rem;
+      padding: 4rem 0 1rem;
       border-top: 1px solid rgba(56, 189, 248, 0.1);
+      position: relative;
+      overflow: hidden;
     }
 
-    footer p {
-      margin-bottom: 0;
-      font-size: 0.95rem;
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--steel-blue), transparent);
+      opacity: 0.5;
     }
 
-    .footer-content {
+    .footer-top {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    }
+
+    .footer-section h5 {
+      color: var(--white);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: 0.75rem;
+    }
+
+    .footer-section h5 i {
+      color: var(--steel-blue);
+      font-size: 1.3rem;
     }
 
     .footer-links {
       display: flex;
-      gap: 2rem;
+      flex-direction: column;
+      gap: 0.75rem;
     }
 
     .footer-links a {
       color: var(--medium-gray);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: var(--transition-smooth);
+      font-size: 0.95rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .footer-links a::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--steel-blue);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .footer-links a:hover {
       color: var(--steel-blue);
+      transform: translateX(5px);
+    }
+
+    .footer-links a:hover::before {
+      opacity: 1;
+    }
+
+    .footer-contact-item {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-contact-item strong {
+      color: var(--white);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-contact-item a {
+      color: var(--medium-gray);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact-item a:hover {
+      color: var(--steel-blue);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--steel-blue);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      font-size: 1rem;
+    }
+
+    .social-icon:hover {
+      background: var(--steel-blue);
+      border-color: var(--steel-blue);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+    }
+
+    .footer-description {
+      color: var(--medium-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .footer-description strong {
+      color: var(--white);
     }
 
     .footer-bottom {
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(56, 189, 248, 0.1);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom-text {
+      color: var(--medium-gray);
+    }
+
+    .footer-bottom-text strong {
+      color: var(--steel-blue);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom-links a {
+      color: var(--medium-gray);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--steel-blue);
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        padding: 2rem 0 1rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-bottom-links {
+        justify-content: center;
+      }
     }
 
     /* ============================================
@@ -887,15 +1367,36 @@
 <!-- NAVIGATION BAR -->
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="#"><i class="bi bi-building me-2"></i>ArchSpace Design</a>
+    <a class="navbar-brand" href="#">
+      <div class="navbar-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="32" height="24" rx="2" fill="none" stroke="url(#gradient)" stroke-width="2"/>
+          <line x1="12" y1="8" x2="12" y2="32" stroke="url(#gradient)" stroke-width="1.5"/>
+          <line x1="20" y1="8" x2="20" y2="32" stroke="url(#gradient)" stroke-width="1.5"/>
+          <line x1="28" y1="8" x2="28" y2="32" stroke="url(#gradient)" stroke-width="1.5"/>
+          <rect x="8" y="16" width="3" height="8" fill="url(#gradient)"/>
+          <rect x="17" y="14" width="3" height="10" fill="url(#gradient)"/>
+          <rect x="26" y="18" width="3" height="6" fill="url(#gradient)"/>
+          <defs>
+            <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+              <stop offset="0%" stop-color="#38bdf8"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="ms-2">ArchSpace Design</span>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -903,7 +1404,20 @@
 </nav>
 
 <!-- HERO SECTION -->
-<section class="hero">
+<section class="hero" id="home">
+  <div class="hero-background-slider" id="heroSlider">
+    <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1494145904049-0dca59b4bbad?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1505842465776-3d90f6163101?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1452175651348-6f67c0d8bda2?auto=format&fit=crop&w=1200&q=80')"></div>
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80')"></div>
+  </div>
+
   <div class="floating-shape shape-1"></div>
   <div class="floating-shape shape-2"></div>
 
@@ -914,6 +1428,10 @@
       <a href="#contact" class="btn btn-primary btn-lg">Get Consultation <i class="bi bi-arrow-right ms-2"></i></a>
     </div>
   </div>
+
+  <div class="slider-dots" id="sliderDots"></div>
+  <button class="slider-nav-btn prev" id="sliderPrev"><i class="bi bi-chevron-left"></i></button>
+  <button class="slider-nav-btn next" id="sliderNext"><i class="bi bi-chevron-right"></i></button>
 </section>
 
 <!-- ABOUT SECTION -->
@@ -954,7 +1472,13 @@
           <div class="service-card-content">
             <div class="service-icon"><i class="bi bi-building"></i></div>
             <h5>Architectural Design</h5>
-            <p>Modern designs with aesthetic appeal, combining artistic vision with practical innovation.</p>
+            <ul class="service-points">
+              <li>Modern aesthetic designs</li>
+              <li>Space optimization</li>
+              <li>3D modeling & visualization</li>
+              <li>Sustainable design principles</li>
+              <li>Interior space planning</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -963,7 +1487,13 @@
           <div class="service-card-content">
             <div class="service-icon"><i class="bi bi-diagram-3"></i></div>
             <h5>Structural Engineering</h5>
-            <p>Safe, optimized, and code-compliant designs meeting highest standards of safety and durability.</p>
+            <ul class="service-points">
+              <li>Code-compliant designs</li>
+              <li>Safety analysis & testing</li>
+              <li>Load calculations</li>
+              <li>Foundation design</li>
+              <li>Risk assessment</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -972,7 +1502,13 @@
           <div class="service-card-content">
             <div class="service-icon"><i class="bi bi-tools"></i></div>
             <h5>Site Supervision</h5>
-            <p>On-site execution monitoring ensuring every detail is built to perfection.</p>
+            <ul class="service-points">
+              <li>On-site quality control</li>
+              <li>Progress monitoring</li>
+              <li>Workmanship verification</li>
+              <li>Safety compliance checks</li>
+              <li>Inspection & reporting</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -981,7 +1517,13 @@
           <div class="service-card-content">
             <div class="service-icon"><i class="bi bi-image"></i></div>
             <h5>3D Visualization</h5>
-            <p>Photorealistic renderings and CAD models showing your project before construction.</p>
+            <ul class="service-points">
+              <li>Photorealistic renderings</li>
+              <li>Virtual walkthroughs</li>
+              <li>Material visualization</li>
+              <li>Lighting simulation</li>
+              <li>Animation presentations</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -990,7 +1532,13 @@
           <div class="service-card-content">
             <div class="service-icon"><i class="bi bi-file-check"></i></div>
             <h5>Building Approvals</h5>
-            <p>Complete documentation and regulatory compliance navigating all municipal requirements.</p>
+            <ul class="service-points">
+              <li>Municipal compliance</li>
+              <li>Regulatory documentation</li>
+              <li>Permission processing</li>
+              <li>Sanction drawing prep</li>
+              <li>Authority coordination</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -999,7 +1547,43 @@
           <div class="service-card-content">
             <div class="service-icon"><i class="bi bi-chat-dots"></i></div>
             <h5>Project Consulting</h5>
-            <p>Expert guidance for complex projects optimizing budgets, timelines, and design solutions.</p>
+            <ul class="service-points">
+              <li>Expert guidance</li>
+              <li>Budget optimization</li>
+              <li>Timeline planning</li>
+              <li>Design solutions</li>
+              <li>Problem solving</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-card-content">
+            <div class="service-icon"><i class="bi bi-hammer"></i></div>
+            <h5>Construction Planning</h5>
+            <ul class="service-points">
+              <li>Detailed schedules</li>
+              <li>Resource allocation</li>
+              <li>Cost estimation</li>
+              <li>Method statements</li>
+              <li>Project coordination</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="service-card">
+          <div class="service-card-content">
+            <div class="service-icon"><i class="bi bi-lightning-charge"></i></div>
+            <h5>Renovation & Restoration</h5>
+            <ul class="service-points">
+              <li>Heritage preservation</li>
+              <li>Structural repairs</li>
+              <li>Modern upgrades</li>
+              <li>Authentic restoration</li>
+              <li>Condition assessment</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -1042,6 +1626,33 @@
           </div>
         </div>
       </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=80" alt="Luxury Residential" class="project-image">
+        <div class="project-overlay">
+          <div class="project-info">
+            <h6>Luxury Residential</h6>
+            <p>Premium Living</p>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Corporate Office" class="project-image">
+        <div class="project-overlay">
+          <div class="project-info">
+            <h6>Corporate Office</h6>
+            <p>Business Excellence</p>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1494145904049-0dca59b4bbad?auto=format&fit=crop&w=600&q=80" alt="Educational Complex" class="project-image">
+        <div class="project-overlay">
+          <div class="project-info">
+            <h6>Educational Complex</h6>
+            <p>Learning Spaces</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1057,48 +1668,233 @@
   </div>
 </section>
 
-<!-- CONTACT SECTION -->
-<section id="contact" class="section-padding">
+<!-- CERTIFICATIONS SECTION -->
+<section id="certifications" class="section-padding">
   <div class="container">
-    <div class="contact-header">
-      <h2>Get in Touch</h2>
-      <p>Solan, Himachal Pradesh • Ready to collaborate on your next project</p>
+    <div class="certifications-header">
+      <h2>Professional Certifications</h2>
+      <p class="mt-2 text-muted">Recognized standards and quality assurances</p>
     </div>
-    <form class="contact-form" id="contactForm">
-      <div class="form-group">
-        <input type="text" class="form-control" id="nameInput" placeholder="Your Full Name" required>
+    <div class="certifications-grid">
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-check-circle"></i>
+        </div>
+        <h5>ISO 9001:2015</h5>
+        <p>Quality Management System</p>
+        <span class="certification-badge">CERTIFIED</span>
       </div>
-      <div class="form-group">
-        <input type="email" class="form-control" id="emailInput" placeholder="Email Address" required>
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h5>ASCE Certification</h5>
+        <p>Structural Engineering</p>
+        <span class="certification-badge">CERTIFIED</span>
       </div>
-      <div class="form-group">
-        <input type="tel" class="form-control" id="phoneInput" placeholder="Phone Number (Optional)">
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-award"></i>
+        </div>
+        <h5>CAD Standards</h5>
+        <p>AutoCAD & BIM Certified</p>
+        <span class="certification-badge">CERTIFIED</span>
       </div>
-      <div class="form-group">
-        <textarea class="form-control" id="messageInput" placeholder="Tell us about your project..." required></textarea>
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-building"></i>
+        </div>
+        <h5>Building Safety</h5>
+        <p>NBC Compliance Expert</p>
+        <span class="certification-badge">VERIFIED</span>
       </div>
-      <button type="submit" class="btn btn-primary form-submit-btn">Send Message <i class="bi bi-send ms-2"></i></button>
-    </form>
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-lightning-charge"></i>
+        </div>
+        <h5>Green Building</h5>
+        <p>LEED & Sustainability</p>
+        <span class="certification-badge">CERTIFIED</span>
+      </div>
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-gear"></i>
+        </div>
+        <h5>REVIT Professional</h5>
+        <p>BIM Modeling Expert</p>
+        <span class="certification-badge">CERTIFIED</span>
+      </div>
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-file-earmark-pdf"></i>
+        </div>
+        <h5>Project Management</h5>
+        <p>PMP & Site Management</p>
+        <span class="certification-badge">CERTIFIED</span>
+      </div>
+      <div class="certification-card">
+        <div class="certification-icon">
+          <i class="bi bi-graph-up"></i>
+        </div>
+        <h5>Industry Excellence</h5>
+        <p>15+ Years Experience</p>
+        <span class="certification-badge">AWARDED</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- CONTACT SECTION -->
+<section id="contact" class="section-padding">
+  <div class="container">
+    <h2 class="text-center mb-5" style="opacity: 0; animation: fade-scale-in 0.8s ease-out forwards;">Get in Touch</h2>
+    
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Let's Work Together</h3>
+        
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="bi bi-geo-alt"></i>
+          </div>
+          <div class="contact-info-content">
+            <h5>Office Location</h5>
+            <p>Solan, Himachal Pradesh, India<br>A premier hub for architectural excellence</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="bi bi-telephone"></i>
+          </div>
+          <div class="contact-info-content">
+            <h5>Phone</h5>
+            <p><a href="tel:+919876543210">+91 9876543210</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="bi bi-envelope"></i>
+          </div>
+          <div class="contact-info-content">
+            <h5>Email</h5>
+            <p><a href="mailto:info@archspacedesign.com">info@archspacedesign.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <div class="contact-info-content">
+            <h5>Working Hours</h5>
+            <p>Mon - Fri: 9:00 AM - 6:00 PM<br>Sat: 10:00 AM - 4:00 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <input type="text" class="form-control" id="nameInput" placeholder="Your Full Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="emailInput" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" class="form-control" id="phoneInput" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+          <select class="form-control" id="serviceInput" required>
+            <option value="">Select Service</option>
+            <option value="Architecture">Architectural Design</option>
+            <option value="Structural">Structural Engineering</option>
+            <option value="Visualization">3D Visualization</option>
+            <option value="Consultation">Project Consultation</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="messageInput" placeholder="Tell us about your project..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit-btn">Send Message <i class="bi bi-send ms-2"></i></button>
+      </form>
+    </div>
+
+    <div class="map-container mt-5">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3388.6301476819046!2d76.77017347520324!3d30.90596447367384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ffc8e8e8e8e8d%3A0x8e8e8e8e8e8e8e!2sSolan%2C%20Himachal%20Pradesh!5e0!3m2!1sen!2sin!4v1234567890" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-content">
-      <div>
-        <h5 class="text-white mb-3">ArchSpace Design</h5>
-        <p class="mb-0">Premium Architecture & Structural Engineering</p>
+    <div class="footer-top">
+      <div class="footer-section">
+        <h5><i class="bi bi-building"></i>ArchSpace Design</h5>
+        <p class="footer-description">Premium architecture and structural engineering solutions delivering innovative designs with structural integrity for over a decade.</p>
+        <div class="footer-social mt-3">
+          <a href="#" class="social-icon" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-icon" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon" title="Twitter"><i class="bi bi-twitter"></i></a>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+
+      <div class="footer-section">
+        <h5><i class="bi bi-link-45deg"></i>Quick Links</h5>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h5><i class="bi bi-briefcase"></i>Services</h5>
+        <div class="footer-links">
+          <a href="#services">Architectural Design</a>
+          <a href="#services">Structural Engineering</a>
+          <a href="#services">3D Visualization</a>
+          <a href="#services">Site Supervision</a>
+          <a href="#services">Building Approvals</a>
+          <a href="#services">Project Consulting</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h5><i class="bi bi-headset"></i>Contact Info</h5>
+        <div class="footer-contact-item">
+          <strong>Phone</strong>
+          <a href="tel:+919876543210">+91 9876543210</a>
+        </div>
+        <div class="footer-contact-item">
+          <strong>Email</strong>
+          <a href="mailto:info@archspacedesign.com">info@archspacedesign.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <strong>Location</strong>
+          <p>Solan, Himachal Pradesh, India</p>
+        </div>
+        <div class="footer-contact-item">
+          <strong>Hours</strong>
+          <p>Mon-Fri: 9 AM - 6 PM<br>Sat: 10 AM - 4 PM</p>
+        </div>
       </div>
     </div>
+
     <div class="footer-bottom">
-      <p>© 2026 ArchSpace Design. All Rights Reserved.</p>
+      <p class="footer-bottom-text">&copy; 2026 <strong>ArchSpace Design</strong>. All Rights Reserved. | Designed with <i class="bi bi-heart-fill" style="color: var(--steel-blue);"></i> for Architecture</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Disclaimer</a>
+        <a href="#">Sitemap</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -1106,7 +1902,67 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+  // =============================================
+  // BACKGROUND SLIDER
+  // =============================================
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsContainer = document.getElementById('sliderDots');
+  let currentSlide = 0;
+  const slideInterval = 2000; // 2 seconds
+  let autoSlideTimer;
+
+  // Create dots
+  slides.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('slider-dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(index));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.slider-dot');
+
+  function showSlide(n) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[n].classList.add('active');
+    dots[n].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+    resetAutoSlide();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+    resetAutoSlide();
+  }
+
+  function goToSlide(n) {
+    currentSlide = n;
+    showSlide(currentSlide);
+    resetAutoSlide();
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = setInterval(nextSlide, slideInterval);
+  }
+
+  // Auto-slide
+  autoSlideTimer = setInterval(nextSlide, slideInterval);
+
+  // Navigation buttons
+  document.getElementById('sliderNext').addEventListener('click', nextSlide);
+  document.getElementById('sliderPrev').addEventListener('click', prevSlide);
+
+  // =============================================
   // NAVBAR SCROLL EFFECT
+  // =============================================
   const navbar = document.querySelector('.navbar');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
@@ -1116,7 +1972,9 @@
     }
   });
 
+  // =============================================
   // INTERSECTION OBSERVER - Scroll Animations
+  // =============================================
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -1131,7 +1989,9 @@
     });
   }, observerOptions);
 
+  // =============================================
   // 3D IMAGE TILT EFFECT
+  // =============================================
   const aboutImage = document.querySelector('.about-image');
   if (aboutImage) {
     aboutImage.addEventListener('mousemove', (e) => {
@@ -1150,7 +2010,9 @@
     });
   }
 
+  // =============================================
   // PROJECT CARDS - 3D MOUSE TILT
+  // =============================================
   const projectCards = document.querySelectorAll('.project-card');
   projectCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -1169,16 +2031,9 @@
     });
   });
 
-  // PARALLAX SCROLLING
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    window.addEventListener('scroll', () => {
-      const scrollPosition = window.scrollY;
-      hero.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
-    });
-  }
-
+  // =============================================
   // SMOOTH SCROLL FOR ANCHOR LINKS
+  // =============================================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -1192,7 +2047,9 @@
     });
   });
 
+  // =============================================
   // CONTACT FORM HANDLER
+  // =============================================
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -1200,9 +2057,10 @@
       const name = document.getElementById('nameInput').value;
       const email = document.getElementById('emailInput').value;
       const phone = document.getElementById('phoneInput').value;
+      const service = document.getElementById('serviceInput').value;
       const message = document.getElementById('messageInput').value;
 
-      if (!name || !email || !message) {
+      if (!name || !email || !message || !service) {
         alert('Please fill in all required fields.');
         return;
       }
@@ -1213,14 +2071,23 @@
         return;
       }
 
-      alert(`Thank you, ${name}! We'll get back to you soon.`);
+      alert(`Thank you, ${name}! We've received your inquiry and will get back to you soon.`);
       contactForm.reset();
 
-      console.log({ name, email, phone, message, timestamp: new Date().toISOString() });
+      console.log({ 
+        name, 
+        email, 
+        phone, 
+        service,
+        message, 
+        timestamp: new Date().toISOString() 
+      });
     });
   }
 
+  // =============================================
   // FORM INPUT ANIMATIONS
+  // =============================================
   const formInputs = document.querySelectorAll('.form-control');
   formInputs.forEach(input => {
     input.addEventListener('focus', () => {
@@ -1232,18 +2099,30 @@
     });
   });
 
+  // =============================================
   // OBSERVE CARDS FOR SCROLL ANIMATIONS
-  document.querySelectorAll('.service-card, .project-card').forEach(card => {
+  // =============================================
+  document.querySelectorAll('.service-card, .project-card, .certification-card').forEach(card => {
     observer.observe(card);
   });
 
+  // =============================================
   // DYNAMIC YEAR IN FOOTER
+  // =============================================
   document.addEventListener('DOMContentLoaded', () => {
     const currentYear = new Date().getFullYear();
     const footerText = document.querySelector('footer p');
     if (footerText) {
-      footerText.textContent = `© ${currentYear} ArchSpace Design. All Rights Reserved.`;
+      footerText.innerHTML = `&copy; ${currentYear} <strong>ArchSpace Design</strong>. All Rights Reserved. | Designed with <i class="bi bi-heart-fill" style="color: var(--steel-blue);"></i> for Architecture`;
     }
+  });
+
+  // =============================================
+  // KEYBOARD NAVIGATION FOR SLIDER
+  // =============================================
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
   });
 </script>
 
